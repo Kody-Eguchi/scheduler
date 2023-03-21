@@ -6,7 +6,7 @@ function DayListItem(props) {
 
   const dayClass = classNames({
     "day-list__item" : true,
-    "day-list__item--selected": props.selected,
+    "day-list__item--selected": props.name === props.day,
     "day-list__item--full": !props.spots 
   });
 
