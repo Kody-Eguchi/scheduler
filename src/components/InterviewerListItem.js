@@ -6,17 +6,17 @@ function InterviewerListItem(props) {
 
   const InterviewerClass = classNames({
     "interviewers__item": true,
-    "interviewers__item--selected": props.id === props.number,
+    "interviewers__item--selected": props.selected
   });
 
   return (
-    <li className={InterviewerClass} onClick={()=> props.setInterviewer(props.id)}>
+    <li className={InterviewerClass} onClick={props.setInterviewer}>
       <img
         className="interviewers__item-image"
         src={props.avatar}
         alt={props.name}
       />
-      { props.id === props.number && <span>{props.name}</span>}
+      {props.selected && props.name}
     </li>
   )
 }

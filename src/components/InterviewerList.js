@@ -9,13 +9,10 @@ function InterviewerList(props) {
   return <InterviewerListItem 
     key={interviewer.id} 
     {...interviewer} 
-    number={props.interviewer} 
-    setInterviewer={props.setInterviewer}
-  />
-})
-
-
-
+    selected={interviewer.id === props.interviewer}
+    setInterviewer={()=>props.setInterviewer(interviewer.id)}
+    />
+  })
 
   return (
     <section className="interviewers">
