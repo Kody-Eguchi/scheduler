@@ -3,7 +3,10 @@ import axios from "axios";
 import DayList from "./DayList";
 import Appointment from "./Appointment/index"
 
+import selectors from "helpers/selectors";
+
 import "components/Application.scss";
+
 
 import appointments from 'components/appointmentData';
 
@@ -12,12 +15,14 @@ export default function Application() {
   const [day, setDay] = useState([]);
   const [days, setDays] = useState([]);
 
+  //API REQUEST FOR DAYS DATA
   useEffect(() => {
     axios.get('/api/days').then(res => {
      setDays(res.data);
     })
   }, [days])
-   
+  
+  
   
   const appointmentArr = Object.values(appointments).map(appointment => {
     return <Appointment key={appointment.id} {...appointment}/>
