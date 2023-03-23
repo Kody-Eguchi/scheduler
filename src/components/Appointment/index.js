@@ -4,7 +4,7 @@ import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
 
-function index(props) {
+function Appointment(props) {
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -13,4 +13,4 @@ function index(props) {
   )
 }
 
-export default index
+export default Appointment
