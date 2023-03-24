@@ -1,5 +1,4 @@
 
-
 //HELPER FUNCTION FOR RETURNING APPOINTMENTS OF GIVEN DAY
 export function getAppointmentsForDay(state, day) {
   const appointments = state.appointments;
@@ -36,5 +35,23 @@ export function getAppointmentsForDay(state, day) {
  
 //   return filteredAppointment;
 // }
+
+export function getInterview(state, interview) {
+
+  if (interview === null) return null;
+  const allAppointmentWithInterview = Object.values(state.appointments).filter(appointment => appointment.interview != null)
+  
+  
+  const matchedInterview = allAppointmentWithInterview.filter(a => a.interview.student=== interview.student)
+ 
+  for (const interviewer of Object.values(state.interviewers)) {
+    
+   if (interviewer.id === matchedInterview[0].interview.interviewer ) {
+    matchedInterview[0].interview.interviewer = interviewer
+   }
+  }
+  
+  return matchedInterview[0].interview
+}
 
 
