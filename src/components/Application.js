@@ -3,28 +3,34 @@ import axios from "axios";
 import DayList from "./DayList";
 import Appointment from "./Appointment/index"
 
-import selectors from "helpers/selectors";
+import {getAppointmentsForDay} from "helpers/selectors";
 
 import "components/Application.scss";
 
-
-import appointments from 'components/appointmentData';
-
 export default function Application() {
 
-  const [day, setDay] = useState([]);
-  const [days, setDays] = useState([]);
-
-  //API REQUEST FOR DAYS DATA
-  useEffect(() => {
-    axios.get('/api/days').then(res => {
-     setDays(res.data);
+  const [state, setState] = useState({
+      day: "Monday",
+      days: [],
+      appointments: {}
     })
-  }, [days])
+
+  const setDay = day => setState({ ...state, day });
+  // const setDays = days => setState(prev => ({ ...prev, days }));
+  // const setAppointment = appointments => setState({ ...state, appointments });
+
+  useEffect(() => {
+    Promise.all([
+      axios.get('/api/days'),
+      axios.get('/api/appointments'),
+    ]).then((all) => {
+      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data}));
+    });
+  }, [])
   
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
   
-  
-  const appointmentArr = Object.values(appointments).map(appointment => {
+  const appointmentArr = dailyAppointments.map(appointment => {
     return <Appointment key={appointment.id} {...appointment}/>
   })
 
@@ -39,8 +45,8 @@ export default function Application() {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-            days={days}
-            value={day}
+            days={state.days}
+            value={state.day}
             onChange={setDay}
           />
         </nav>
