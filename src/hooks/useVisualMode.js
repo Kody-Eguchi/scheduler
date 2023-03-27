@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function useVisualMode(initialMode) {
   const [mode, setMode] = useState(initialMode);
@@ -25,7 +25,7 @@ export default function useVisualMode(initialMode) {
 
 /* 2nd opinion code*/
 // export default function useVisualMode(initial) {
-  
+
 //   const [history, setHistory] = useState([initial]);
 
 //   const transition = (newMode, replace = false) => {
@@ -36,7 +36,7 @@ export default function useVisualMode(initialMode) {
 //     newHistory.push(newMode);
 //     setHistory(newHistory);
 //   }
-  
+
 //   const back = () => {
 //     if (history.length === 1) return ;
 //     const newHistory = [...history];
@@ -53,18 +53,17 @@ export default function useVisualMode(initialMode) {
 //   const [history, setHistory] = useState([initial]);
 
 //   const transition = (change, replace = false) => {
-    
+
 //     if (replace) {
 //       setHistory(history.slice(0 , history.length -1));
 //       setMode(history[history.length - 1])
-//     } 
+//     }
 //     setMode(change);
-    // history.push(mode);  ❌this was only problem 
+// history.push(mode);  ❌this was only problem
 //   }
-  
-  
+
 //   const back = () => {
-//     setHistory(history.slice(0 , history.length -1)); 
+//     setHistory(history.slice(0 , history.length -1));
 //     setMode(history[history.length -1])
 //   }
 
