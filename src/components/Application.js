@@ -54,10 +54,6 @@ export default function Application() {
       ...state.appointments[id],
       interview: { ...interview },
     };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
 
     return axios
       .put(`/api/appointments/${id}`, { interview })
@@ -70,11 +66,6 @@ export default function Application() {
       .catch((err) => {
         console.log(err);
       });
-
-    // axios.put("/api/appointments/:id", appointments).then((res) => {
-    //   console.log(res.data.appointments);
-    //   setState({ appointments: res.data.appointments });
-    // });
   };
 
   const schedule = appointments.map((appointment) => {
