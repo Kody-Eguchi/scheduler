@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Show(props) {
   return (
@@ -22,12 +22,12 @@ function Show(props) {
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
-            onClick={props.onDelete}
+            onClick={props.cancelInterview}
           />
         </section>
       </section>
     </main>
-  )
+  );
 }
 
-export default Show
+export default Show;
