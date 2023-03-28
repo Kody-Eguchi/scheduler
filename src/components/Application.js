@@ -53,7 +53,10 @@ export default function Application() {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">{appointments}</section>
+      <section className="schedule">
+        {appointments}
+        <Appointment key="last" time="5pm" />
+      </section>
     </main>
   );
 }
