@@ -88,7 +88,6 @@ export default function useApplicationData() {
     };
 
     newDays[index] = newDay;
-    console.log(newDays, "🚨");
 
     setState({
       ...state,
