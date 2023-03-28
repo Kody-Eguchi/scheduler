@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Error(props) {
   return (
@@ -11,10 +11,10 @@ function Error(props) {
         className="appointment__error-close"
         src="images/close.png"
         alt="Close"
-        onClick={props.onClose}
+        onClick={props.back}
       />
     </main>
-  )
+  );
 }
 
-export default Error
+export default Error;

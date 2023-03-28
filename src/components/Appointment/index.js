@@ -6,6 +6,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 
 import useVisualMode from "hooks/useVisualMode";
 
@@ -16,6 +17,8 @@ function Appointment(props) {
   const SAVING = "SAVING";
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
+  const EDIT = "EDIT";
+  const ERROR_SAVE = "ERROR_SAVE";
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -27,16 +30,29 @@ function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    await props.bookInterview(props.id, interview);
-    transition(SHOW);
+    try {
+      await props.bookInterview(props.id, interview);
+      transition(SHOW);
+    } catch (err) {
+      transition(ERROR_SAVE, true);
+    }
   };
 
   const erase = async () => {
-    transition(DELETING);
-    await props.cancelInterview(props.id);
-    transition(EMPTY);
+    transition(DELETING, true);
+    try {
+      await props.cancelInterview(props.id);
+      transition(EMPTY);
+    } catch (err) {
+      transition(ERROR_SAVE, true);
+    }
   };
 
+  const edit = () => {
+    transition(EDIT);
+  };
+
+  console.log(props.interview);
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -58,8 +74,19 @@ function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           confirm={() => transition(CONFIRM)}
+          edit={edit}
         />
       )}
+      {mode === EDIT && (
+        <Form
+          student={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
+          onCancel={back}
+          save={save}
+        />
+      )}
+      {mode === ERROR_SAVE && <Error back={back} message={""} />}
     </article>
   );
 }
