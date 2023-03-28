@@ -1,28 +1,33 @@
-import React from 'react';
-import 'components/InterviewerList.scss';
+import React from "react";
+import "components/InterviewerList.scss";
 
-import InterviewerListItem from './InterviewerListItem';
+import InterviewerListItem from "./InterviewerListItem";
+
+import PropTypes from "prop-types";
 
 function InterviewerList(props) {
-
-  const InterviewerListItemArr = props.interviewers.map(interviewer => {
-  return <InterviewerListItem 
-      key={interviewer.id}
-      name={interviewer.name}
-      avatar={interviewer.avatar}
-      selected={interviewer.id === props.value}
-      setInterviewer={() => props.setInterviewer(interviewer.id)}   
-    />
-  })
+  const InterviewerListItemArr = props.interviewers.map((interviewer) => {
+    return (
+      <InterviewerListItem
+        key={interviewer.id}
+        name={interviewer.name}
+        avatar={interviewer.avatar}
+        selected={interviewer.id === props.value}
+        setInterviewer={() => props.setInterviewer(interviewer.id)}
+      />
+    );
+  });
 
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
-      <ul className="interviewers__list">
-        {InterviewerListItemArr}
-      </ul>
+      <ul className="interviewers__list">{InterviewerListItemArr}</ul>
     </section>
-  )
+  );
 }
 
-export default InterviewerList
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired,
+};
+
+export default InterviewerList;
