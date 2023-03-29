@@ -64,9 +64,7 @@ export function getInterviewersForDay(state, day) {
   }
 
   const interviewerIds = dayObj.interviewers;
-  // console.log(interviewerIds);
-
   const filteredInterviewers = interviewerIds.map((id) => interviewers[id]);
-  // console.log(filteredInterviewers )
+
   return filteredInterviewers;
 }
