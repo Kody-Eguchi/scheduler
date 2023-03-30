@@ -24,7 +24,7 @@ export default function useApplicationData() {
     });
   }, []);
 
-  // const setDay = (day) => setState({ ...state, day });
+  const setDay = (day) => setState({ ...state, day });
 
   const bookInterview = (id, interview) => {
     const appointment = {
